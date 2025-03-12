@@ -1,105 +1,84 @@
-DATASET INFORMATION
-*********************
-1. Title of dataset: The MTS-Dialog dataset
-
-2. Description:
-    it's a colection of 1.7k short doctor-patient conversations and corresponding clinical notes
-
-3. Recommended Citation:
-   ```bibtex
-   @inproceedings{ben-abacha-etal-2023-empirical,
-    title = "An Empirical Study of Clinical Note Generation from Doctor-Patient Encounters",
-    title     = {An Empirical Study of Clinical Note Generation from Doctor-Patient Encounters},
-    author    = {Asma Ben Abacha and Wen-wai Yim and Yadan Fan and Thomas Lin},
-    booktitle = {Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics},
-    year      = {2023},
-    pages     = {2291--2302},
-    address   = {Dubrovnik, Croatia},
-    publisher = {Association for Computational Linguistics},
-    url       = {https://aclanthology.org/2023.eacl-main.168/},
-    doi       = {10.18653/v1/2023.eacl-main.168}
-}
+#  Introduction 
 
 
-*************************
-DATA ACCESS INFORMATION
-*************************
+1. **<u>Project Background</u>** 
+    In the healthcare industry, doctors often spend a significant amount of time reviewing a patient’s medical history and clinical notes to understand their current situation. This process can be time-consuming and inefficient, especially when doctors need to navigate through extensive records to find relevant information. Additionally, during patient encounters, doctors must manually document clinical notes, which adds to their workload and can lead to delays in patient care.  
+    
+2. **<u>Problem Statement</u>** 
+    Doctors face several challenges in managing clinical documentation:
 
-1. Source : [MTS-DIALOG](https://github.com/abachaa/MTS-Dialog)
+    - Time-Consuming Reviews: Doctors spend a significant amount of time reviewing past clinical notes to understand a patient’s medical history.
 
-2. License : Creative Commons Attribution 4.0 International (CC BY 4.0)
- 
+    - Manual Documentation: The process of manually writing clinical notes during or after patient encounters is tedious and prone to errors.
 
-****************************
-METHODS OF DATA COLLECTION
-****************************
+    - Inefficient Information Access: Finding specific information in a patient’s medical history can be difficult, especially when notes are unstructured or scattered across multiple records.
 
-1. Methods of Data Collection
-The MTS-DIALOG dataset was created by generating simulated doctor-patient conversations from publicly available clinical notes. These clinical notes were sourced from the [Mtsamples collection](https://www.mtsamples.com/), a public repository of de-identified medical notes (South et al., 2014; Moramarco et al., 2022a). The selected notes cover the six most frequent note types and specialties in the collection, including:
+    These challenges lead to inefficiencies, increased workload, and potential delays in patient care. A solution is needed to automate clinical note generation and provide quick, accurate answers to doctors' queries about their patients. 
 
-        - General Medicine
-        - SOAP (Subjective, Objective, Assessment, Plan)
-        - Neurology
-        - Orthopedic
-        - Dermatology
-        - Allergy/Immunology
+1. **<u>Planned Solution</u>** 
+     Our solution to the problems described above is a web application that will allow doctors to:
+    - **Input Key Points**: Doctors can easily input key points and information from patient encounters.
 
-2. Quality assurance procedures
-The quality of the MTS-DIALOG dataset is ensured through a three-stage process:
+    - **Generate Clinical Notes**: The app will use a model to generate clinical notes following a defined process, ensuring accuracy and consistency.
 
-	**Annotator Selection**: Only candidates with medical training (e.g., former medical scribes) were hired as annotators.
-   
-	**Training and Feedback**: Annotators received one-on-one periodic feedback during the initial stages from an experienced trainer.
-   
-	**Independent Validation**: The entire dataset was independently validated using a rubric grading system to ensure accuracy and consistency.
+    - **Answer Patient Queries**: The app will use the generated notes (stored as part of the RAG pipeline) to answer doctors' questions about their patients, providing quick and relevant information.  
 
-************************
-SUMMARY OF DATA FILES
-************************
+2. **<u>Key User Level Requirements</u>** 
+    The key user level requirements we obtained were: 
+        ● Doctors should be able to input key points and information from patient encounters easily.
 
-1. List of data files:\
-	Filename: **MTS-Dialog-TestSet-1-MEDIQA-Chat-2023.csv**\
-	Description:\
-		Official test set used in the MEDIQA-Chat 2023 challenge (Task A : Section Header Topic Classification).
+        ● The system should generate accurate and structured clinical notes using a suitable model.
 
-	Filename: **MTS-Dialog-TestSet-2-MEDIQA-Sum-2023.csv**\
-	Description:\
- 		Official test set used in the MEDIQA-Sum 2023 challenge (Task A & Task B : Section Header Topic Classification & Short Dialogue2Note Summarization).
+        ● The app should use the generated notes to answer doctors' questions about their patients. 
 
-	Filename: **MTS-Dialog-TrainingSet.csv**\
-	Description:\
-		The training set consists of 1,201 pairs of conversations and associated summaries.
+        ● The app must ensure that all patient data is handled securely and in compliance with HIPAA regulations
 
-	Filename: **ValidationSet.csv**\
-	Description:\
-		The validation set consists of 100 pairs of conversations and their summaries.
+3. **<u>Functional Requirements</u>** 
+    We gathered our functional requirements based off of the key user level requirements 
+    which are: 
+        ● Input Handling: The system will accept key points and information from patient encounters.
 
-**Variable list**:\
-    		- id : integer\
-    		- section_header : string\
-    		- section_text : string\
-    		- dialogue : string
-     
+        ● Note Generation: The system will use a fine-tuned model to generate clinical notes following a defined process to ensure accuracy.
+
+        ● Query Answering: The app will retrieve relevant notes to answer doctors' questions about their patients.
+
+        ● Review and Editing: Doctors will be able to review, edit, and finalize generated notes before saving them.
+
+4. **<u>Non-Functional Requirements</u>** 
+    Non-Functional requirements that should be noted while developing this web application 
+    are: 
+        ● Response Time: The system should generate clinical notes and answer queries within a reasonable period of time.
+
+        ● Availability: The system must be operational 24/7 with minimal downtime.    
+
+        ● Security: The system must comply with HIPAA (Health Insurance Portability and Accountability Act) regulations to ensure the privacy and security of patient data. This includes:
+
+            Encrypting data both in transit and at rest.
+
+            Implementing access controls to restrict unauthorized access to patient information.
+
+            Maintaining audit logs to track access and modifications to patient data.
+
+            Ensuring secure user authentication and authorization mechanisms.
+
+        ● Accuracy: The generated notes and query responses must have a high degree of accuracy, with minimal need for manual corrections
 
 
-    > NOTE: the section headers are normalized to 20 labels:
-       1. genhx [HISTORY of PRESENT ILLNESS]
-       2. pastmedicalhx [PAST MEDICAL HISTORY]
-       3. cc [CHIEF COMPLAINT]
-       4. pastsurgical [PAST SURGICAL HISTORY]
-       5. allergy
-       6. ros [REVIEW OF SYSTEMS]
-       7. medications
-       8. assessment
-       9.  exam
-       10. diagnosis
-       11. disposition
-       12. plan
-       13. edcourse [EMERGENCY DEPARTMENT COURSE]
-       14. immunizations
-       15. imaging
-       16. gynhx [GYNECOLOGIC HISTORY]
-       17. procedures
-       18. other_history
-       19. labs
 
+# Technical approach :
+
+
+1. Dataset Overview : 
+
+    One of the key ways to shape our solution was to explore existing research on clinical note generation and medical question answering. Through this exploration, we identified publicly available datasets that provide valuable insights into best practices and real-world challenges. These datasets, containing annotated clinical encounter summaries and patient histories, enable us to benchmark model performance, address issues like unstructured inputs and complex queries, and overcome limitations. By leveraging these datasets, we ensure our solution aligns with proven methods and meets the needs of healthcare professionals.
+
+    - [MTS-DIALOG](./mts_dialog_dataset.md)
+    - [ACI-BENCH](./aci_bench_dataset.md)
+    - [ASCLEPIUS-SYNTHETIC-CLINICAL-NOTES](./asclepius_dataset.md)
+
+2. LLM Benchmarking : 
+    Language models (LLMs) are essential for our solution, enabling accurate clinical note generation and reliable medical question answering. To ensure we select the most effective models, we conducted a benchmark focused on question-answering tasks. This process helps us identify LLMs that align with our needs and deliver a solution tailored to healthcare professionals.
+    - [BENCHMARK_LINK](./benchmark.md)
+  
+3. Pipeline Design : 
+![Generative AI Pipeline](./assets/pipeline.png)
