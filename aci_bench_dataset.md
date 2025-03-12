@@ -59,9 +59,9 @@
     may be joined with the metadata files using either id or encounter_id.
 
 📌 **Variable list**:
-    - dataset : string
-    - encounter_id : string
-    - dialogue : string
-    - note : string  
+  - dataset : string
+  - encounter_id : string
+  - dialogue : string
+  - note : string  
 
 
