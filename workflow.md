@@ -27,7 +27,7 @@ This workflow describes the process of automatically generating clinical notes a
         - structuring(capture the bullet points to a suitable format) and text cleaning
 
 - Step 3: **Clinical Note Generation**:
-    after redefining the input of the user the llm need to generate the clinical note in a multi stage approach .This approach been demonstrated in the research paper (Generating medically-accurate summaries of patient-provider dialogue: Amulti-stage approach using large language models)[https://aclanthology.org/2023.clinicalnlp-1.26.pdf], it utilizes intermediate model calls to extract medical concepts that inform summarization generation :
+    after redefining the input of the user the llm need to generate the clinical note in a multi stage approach .This approach been demonstrated in the research paper [Generating medically-accurate summaries of patient-provider dialogue: Amulti-stage approach using large language models](https://aclanthology.org/2023.clinicalnlp-1.26.pdf), it utilizes intermediate model calls to extract medical concepts that inform summarization generation :
     - extract the patient intent
     - extract the pertinent positive
     - extract the pertinent Unknowns
