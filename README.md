@@ -81,4 +81,4 @@
     - [BENCHMARK_LINK](./benchmark.md)
   
 3. Pipeline Design : 
-![Generative AI Pipeline](./assets/pipeline.png)
+    [WORKFLOW_LINK](./workflow.md)
